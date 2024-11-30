@@ -1,0 +1,158 @@
+[gd_scene load_steps=23 format=3 uid="uid://kw8hgyevm11x"]
+
+[ext_resource type="PackedScene" uid="uid://dskrdqjwm4gfu" path="res://scenes/scene_1.tscn" id="1_6ve65"]
+[ext_resource type="Script" path="res://scripts/game_scene.gd" id="1_k523j"]
+[ext_resource type="PackedScene" uid="uid://bghwa8hxvubw6" path="res://scenes/player.tscn" id="2_00iaf"]
+[ext_resource type="PackedScene" uid="uid://0am18rvgsyht" path="res://scenes/scene_2.tscn" id="3_00na4"]
+[ext_resource type="PackedScene" uid="uid://o63g50rk5u4m" path="res://scenes/scene_3.tscn" id="4_p6iy1"]
+[ext_resource type="PackedScene" uid="uid://2ukut5kr2v06" path="res://scenes/scene_4.tscn" id="5_g2d1f"]
+[ext_resource type="AudioStream" uid="uid://cbrkjl4rdey52" path="res://assets/Ambience/AMB_SciFi_Wind_Heavy_Loop.wav" id="7_g2mqn"]
+[ext_resource type="PackedScene" uid="uid://ctsv7s04mtw8v" path="res://scenes/shadow.tscn" id="8_8fe10"]
+[ext_resource type="PackedScene" uid="uid://be3b6ierbpor3" path="res://scenes/transition_1.tscn" id="9_2ih05"]
+[ext_resource type="PackedScene" uid="uid://dlypfu3ep8oug" path="res://scenes/transition_2.tscn" id="10_o8buv"]
+[ext_resource type="PackedScene" uid="uid://c12luruyc5w2o" path="res://scenes/transition_3.tscn" id="11_0dqba"]
+[ext_resource type="PackedScene" uid="uid://4ndaxhxl3ebf" path="res://scenes/npc_1.tscn" id="12_58x5i"]
+[ext_resource type="PackedScene" uid="uid://baqslwku1tsc1" path="res://scenes/npc_3.tscn" id="13_pbyfk"]
+[ext_resource type="PackedScene" uid="uid://diajgkfjxj41c" path="res://scenes/food.tscn" id="14_fyl0q"]
+[ext_resource type="PackedScene" uid="uid://b1qb43u12wnrw" path="res://scenes/npc_2.tscn" id="15_a31m5"]
+[ext_resource type="PackedScene" uid="uid://csbvevj73fmmf" path="res://scenes/npc_1a.tscn" id="16_7ktxt"]
+[ext_resource type="PackedScene" uid="uid://cb3pxtvrugfpm" path="res://scenes/bushes.tscn" id="17_yux3h"]
+[ext_resource type="PackedScene" uid="uid://ci4cdpy1h76st" path="res://scenes/npc_5.tscn" id="18_kp8cy"]
+[ext_resource type="PackedScene" uid="uid://c8tfhcb28pxvh" path="res://scenes/drink.tscn" id="19_sx1xp"]
+[ext_resource type="PackedScene" uid="uid://dmidxksitnkm4" path="res://scenes/path_2d.tscn" id="20_nl46h"]
+[ext_resource type="Script" path="res://scripts/shadow_speeder.gd" id="21_pkyd3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pw4tu"]
+size = Vector2(56, 248.2)
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource("1_k523j")
+scene_one = ExtResource("1_6ve65")
+scene_two = ExtResource("3_00na4")
+scene_three = ExtResource("4_p6iy1")
+scene_four = ExtResource("5_g2d1f")
+
+[node name="Player" parent="." instance=ExtResource("2_00iaf")]
+position = Vector2(-1250, 15)
+scale = Vector2(0.25, 0.25)
+
+[node name="Scene1" parent="." instance=ExtResource("1_6ve65")]
+
+[node name="Scene2" parent="." instance=ExtResource("3_00na4")]
+position = Vector2(5250, 2.08165e-12)
+
+[node name="Scene3" parent="." instance=ExtResource("4_p6iy1")]
+position = Vector2(10500, 2.08165e-12)
+
+[node name="Scene4" parent="." instance=ExtResource("5_g2d1f")]
+position = Vector2(15650, 2.08165e-12)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_g2mqn")
+autoplay = true
+bus = &"Music"
+
+[node name="Holder" type="Node2D" parent="."]
+position = Vector2(-773, 0)
+
+[node name="Shadow" parent="Holder" instance=ExtResource("8_8fe10")]
+z_index = 5
+position = Vector2(-1543, 0)
+
+[node name="Shadow2" parent="Holder" instance=ExtResource("8_8fe10")]
+z_index = 5
+position = Vector2(-1543, -559)
+
+[node name="Shadow3" parent="Holder" instance=ExtResource("8_8fe10")]
+z_index = 5
+position = Vector2(-1543, 670)
+
+[node name="Shadow4" parent="Holder" instance=ExtResource("8_8fe10")]
+z_index = 5
+position = Vector2(-2230, 712)
+
+[node name="Shadow5" parent="Holder" instance=ExtResource("8_8fe10")]
+z_index = 5
+position = Vector2(-2279, 94)
+
+[node name="Shadow6" parent="Holder" instance=ExtResource("8_8fe10")]
+z_index = 5
+position = Vector2(-2279, -504)
+
+[node name="Shadow7" parent="Holder" instance=ExtResource("8_8fe10")]
+z_index = 5
+position = Vector2(-2963, -504)
+
+[node name="Shadow8" parent="Holder" instance=ExtResource("8_8fe10")]
+z_index = 5
+position = Vector2(-2963, 374)
+
+[node name="transition_1" parent="." instance=ExtResource("9_2ih05")]
+z_index = 1
+position = Vector2(2625, -40)
+scale = Vector2(1.4, 1.4)
+
+[node name="transition_2" parent="." instance=ExtResource("10_o8buv")]
+z_index = 2
+position = Vector2(7900, 2.08165e-12)
+scale = Vector2(1.5, 1.5)
+
+[node name="transition_3" parent="." instance=ExtResource("11_0dqba")]
+z_index = 2
+position = Vector2(13100, -40)
+scale = Vector2(1.4, 1.4)
+
+[node name="NPC_1" parent="." instance=ExtResource("12_58x5i")]
+position = Vector2(-268, 60)
+scale = Vector2(0.6, 0.6)
+
+[node name="NPC_3" parent="." instance=ExtResource("13_pbyfk")]
+position = Vector2(4178, 120)
+scale = Vector2(0.4, 0.4)
+
+[node name="StaticBody2D" parent="." instance=ExtResource("14_fyl0q")]
+position = Vector2(3212, 134)
+scale = Vector2(0.3, 0.3)
+
+[node name="NPC_2" parent="." instance=ExtResource("15_a31m5")]
+position = Vector2(6003, 81)
+scale = Vector2(0.5, 0.5)
+
+[node name="NPC_4" parent="." instance=ExtResource("16_7ktxt")]
+position = Vector2(9094, 60)
+scale = Vector2(0.6, 0.6)
+
+[node name="Bushes" parent="." instance=ExtResource("17_yux3h")]
+position = Vector2(1222, 145)
+scale = Vector2(0.5, 0.5)
+
+[node name="Bushes2" parent="." instance=ExtResource("17_yux3h")]
+position = Vector2(11009, 146)
+rotation = -0.0349066
+scale = Vector2(0.5, 0.5)
+
+[node name="NPC_5" parent="." instance=ExtResource("18_kp8cy")]
+position = Vector2(15000, 60)
+scale = Vector2(0.6, 0.6)
+
+[node name="Drink" parent="." instance=ExtResource("19_sx1xp")]
+visible = false
+position = Vector2(16606, 173)
+rotation = 0.516146
+scale = Vector2(0.3, 0.3)
+
+[node name="Path2D" parent="." instance=ExtResource("20_nl46h")]
+position = Vector2(15, 562)
+
+[node name="Path2D2" parent="." instance=ExtResource("20_nl46h")]
+position = Vector2(10000, 562)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(13007, 15)
+script = ExtResource("21_pkyd3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(88, -14.5)
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_pw4tu")
+one_way_collision = true

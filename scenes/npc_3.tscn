@@ -1,0 +1,116 @@
+[gd_scene load_steps=20 format=3 uid="uid://baqslwku1tsc1"]
+
+[ext_resource type="Script" path="res://scripts/npc_3.gd" id="1_5tic2"]
+[ext_resource type="Texture2D" uid="uid://caiqbko5plwwk" path="res://assets/NPC_3_idle/1.png" id="2_r1gyf"]
+[ext_resource type="FontFile" uid="uid://hvvco63hx1kj" path="res://assets/fonts/gemunu-libre-v8-latin-700.ttf" id="3_5ph06"]
+[ext_resource type="Texture2D" uid="uid://wi0d7gsumwtr" path="res://assets/NPC_3_idle/2.png" id="4_uf24a"]
+[ext_resource type="Texture2D" uid="uid://c17fq3smft8l2" path="res://assets/NPC_3_idle/3.png" id="5_yyder"]
+[ext_resource type="Texture2D" uid="uid://dkjj7kvcfhasm" path="res://assets/NPC_3_idle/4.png" id="6_2crj8"]
+[ext_resource type="Texture2D" uid="uid://b7hwriowj6omc" path="res://assets/NPC_3/2.png" id="7_2lm3a"]
+[ext_resource type="Texture2D" uid="uid://b4mmaomocp3x0" path="res://assets/NPC_3/3.png" id="8_hls7m"]
+[ext_resource type="Texture2D" uid="uid://bwbgny8ntap3e" path="res://assets/NPC_3/4.png" id="9_nlcw4"]
+[ext_resource type="Texture2D" uid="uid://crbhjbi0m3uic" path="res://assets/NPC_3/5.png" id="10_qejo2"]
+[ext_resource type="Texture2D" uid="uid://vwh38dc6cbwu" path="res://assets/NPC_3/6.png" id="11_jiyrw"]
+[ext_resource type="Texture2D" uid="uid://px8252xur8kn" path="res://assets/NPC_3/7.png" id="12_rfn7y"]
+[ext_resource type="Texture2D" uid="uid://oqy8vvq8pv8w" path="res://assets/NPC_3/8.png" id="13_drma5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w5oa4"]
+size = Vector2(27.5261, 11.4961)
+
+[sub_resource type="LabelSettings" id="LabelSettings_uxr6s"]
+font = ExtResource("3_5ph06")
+font_size = 64
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_2pauh"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_r1gyf"), ExtResource("4_uf24a"), ExtResource("5_yyder"), ExtResource("6_2crj8")]
+}
+
+[sub_resource type="Animation" id="Animation_kp0hk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_r1gyf")]
+}
+
+[sub_resource type="Animation" id="Animation_jru62"]
+resource_name = "run"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("7_2lm3a"), ExtResource("8_hls7m"), ExtResource("9_nlcw4"), ExtResource("10_qejo2"), ExtResource("11_jiyrw"), ExtResource("12_rfn7y"), ExtResource("13_drma5")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ii523"]
+_data = {
+"RESET": SubResource("Animation_kp0hk"),
+"idle": SubResource("Animation_2pauh"),
+"run": SubResource("Animation_jru62")
+}
+
+[node name="NPC_3" type="CharacterBody2D"]
+script = ExtResource("1_5tic2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_r1gyf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8, 90)
+scale = Vector2(11.48, 25.4)
+shape = SubResource("RectangleShape2D_w5oa4")
+one_way_collision = true
+
+[node name="Label" type="Label" parent="."]
+z_index = 40
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -97.5
+offset_top = -300.0
+offset_right = 97.5
+offset_bottom = -264.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "[E] TO INTERACT"
+label_settings = SubResource("LabelSettings_uxr6s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ii523")
+}
+autoplay = "idle"

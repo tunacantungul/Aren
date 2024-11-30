@@ -1,0 +1,116 @@
+[gd_scene load_steps=6 format=3 uid="uid://sq05sskw00fa"]
+
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_b1iik"]
+[ext_resource type="PackedScene" uid="uid://7omkhtdpy7jc" path="res://scenes/scene_ui.tscn" id="2_g51ms"]
+[ext_resource type="FontFile" uid="uid://hvvco63hx1kj" path="res://assets/fonts/gemunu-libre-v8-latin-700.ttf" id="3_64w4w"]
+[ext_resource type="AudioStream" uid="uid://coxuayq5coja5" path="res://assets/Ambience/Soundscape/AMB_Soundscape_Magical_Concentrate_Loop.wav" id="4_a7r7p"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0n4vg"]
+font = ExtResource("3_64w4w")
+font_size = 28
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 61.0
+offset_right = 6.0
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b1iik")
+
+[node name="scene_ui" parent="." instance=ExtResource("2_g51ms")]
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(1.25, 1.25)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+z_index = 3
+layout_mode = 0
+offset_left = -304.0
+offset_top = -316.0
+offset_right = 304.0
+offset_bottom = 316.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(304, 316)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 40
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "
+"
+icon_alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Play"]
+layout_mode = 0
+offset_left = 276.0
+offset_right = 332.0
+offset_bottom = 31.0
+text = "PLAY"
+label_settings = SubResource("LabelSettings_0n4vg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "
+"
+icon_alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Options"]
+layout_mode = 0
+offset_left = 256.0
+offset_right = 353.0
+offset_bottom = 31.0
+text = "OPTIONS"
+label_settings = SubResource("LabelSettings_0n4vg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "
+"
+icon_alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Quit"]
+layout_mode = 0
+offset_left = 276.0
+offset_right = 332.0
+offset_bottom = 31.0
+text = "QUIT"
+label_settings = SubResource("LabelSettings_0n4vg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "
+"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/Credits"]
+layout_mode = 0
+offset_left = 276.0
+offset_right = 348.0
+offset_bottom = 31.0
+text = "Credits"
+label_settings = SubResource("LabelSettings_0n4vg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_a7r7p")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Credits" to="." method="_on_credits_pressed"]

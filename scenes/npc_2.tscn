@@ -1,0 +1,120 @@
+[gd_scene load_steps=25 format=3 uid="uid://b1qb43u12wnrw"]
+
+[ext_resource type="Texture2D" uid="uid://qmlth56fcw5l" path="res://assets/NPC_2/1.png" id="1_j86xp"]
+[ext_resource type="Script" path="res://scripts/npc_2.gd" id="1_qaucn"]
+[ext_resource type="FontFile" uid="uid://hvvco63hx1kj" path="res://assets/fonts/gemunu-libre-v8-latin-700.ttf" id="9_d0071"]
+[ext_resource type="Texture2D" uid="uid://ycmhp78bg5pw" path="res://assets/NPC_2_idle/1.png" id="10_ebbo6"]
+[ext_resource type="Texture2D" uid="uid://c3ipmr6yyqx2e" path="res://assets/NPC_2_new/1.png" id="11_b4uvc"]
+[ext_resource type="Texture2D" uid="uid://ertn36tpmm5v" path="res://assets/NPC_2_idle/2.png" id="11_rm4ff"]
+[ext_resource type="Texture2D" uid="uid://beagg55i84h8k" path="res://assets/NPC_2_new/2.png" id="12_2mtvk"]
+[ext_resource type="Texture2D" uid="uid://dnwt3ccq5g27h" path="res://assets/NPC_2_idle/3.png" id="12_6xqiq"]
+[ext_resource type="Texture2D" uid="uid://ehspnxtx0ivf" path="res://assets/NPC_2_new/3.png" id="13_dst1s"]
+[ext_resource type="Texture2D" uid="uid://birfvb84r5u6n" path="res://assets/NPC_2_idle/4.png" id="13_t0xb6"]
+[ext_resource type="Texture2D" uid="uid://b046th24k5alr" path="res://assets/NPC_2_new/4.png" id="14_j5bab"]
+[ext_resource type="Texture2D" uid="uid://bf27sseco72jn" path="res://assets/NPC_2_idle/5.png" id="14_pweea"]
+[ext_resource type="Texture2D" uid="uid://bdcrp68pa7bh7" path="res://assets/NPC_2_idle/6.png" id="15_7ak8n"]
+[ext_resource type="Texture2D" uid="uid://ddcccsodusi17" path="res://assets/NPC_2_new/5.png" id="15_pvfer"]
+[ext_resource type="Texture2D" uid="uid://c1l3vv7k42hgo" path="res://assets/NPC_2_new/6.png" id="16_af00r"]
+[ext_resource type="Texture2D" uid="uid://dcfpi58xsmbvw" path="res://assets/NPC_2_idle/7.png" id="16_jb7tm"]
+[ext_resource type="Texture2D" uid="uid://cdl4nu4k4ve80" path="res://assets/NPC_2_idle/8.png" id="17_esl5m"]
+[ext_resource type="Texture2D" uid="uid://db2ut68o3wyfi" path="res://assets/NPC_2_new/7.png" id="17_nfmtu"]
+
+[sub_resource type="Animation" id="Animation_7q3um"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_j86xp")]
+}
+
+[sub_resource type="Animation" id="Animation_hu8oi"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("10_ebbo6"), ExtResource("11_rm4ff"), ExtResource("12_6xqiq"), ExtResource("13_t0xb6"), ExtResource("14_pweea"), ExtResource("15_7ak8n"), ExtResource("16_jb7tm"), ExtResource("17_esl5m")]
+}
+
+[sub_resource type="Animation" id="Animation_mqm52"]
+resource_name = "run"
+length = 1.3
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("11_b4uvc"), ExtResource("12_2mtvk"), ExtResource("13_dst1s"), ExtResource("14_j5bab"), ExtResource("15_pvfer"), ExtResource("16_af00r"), ExtResource("17_nfmtu")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8t065"]
+_data = {
+"RESET": SubResource("Animation_7q3um"),
+"idle": SubResource("Animation_hu8oi"),
+"run": SubResource("Animation_mqm52")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3v56g"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jtu56"]
+font = ExtResource("9_d0071")
+font_size = 64
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[node name="NPC_2" type="CharacterBody2D"]
+script = ExtResource("1_qaucn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_j86xp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8t065")
+}
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(9.04, 26.24)
+shape = SubResource("RectangleShape2D_3v56g")
+one_way_collision = true
+
+[node name="Label" type="Label" parent="."]
+z_index = 40
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -97.5
+offset_top = -300.0
+offset_right = 97.5
+offset_bottom = -264.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "[E] TO INTERACT"
+label_settings = SubResource("LabelSettings_jtu56")
+horizontal_alignment = 1
+vertical_alignment = 1

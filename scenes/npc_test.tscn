@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2fu2l8672kow"]
+
+[ext_resource type="Script" path="res://scripts/npc_test.gd" id="1_b6kye"]
+[ext_resource type="Texture2D" uid="uid://dcfcat7bap7ab" path="res://icon.svg" id="1_lsjc6"]
+[ext_resource type="PackedScene" uid="uid://blybcqhb2lc87" path="res://scenes/interaction_area.tscn" id="2_igufd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h2o12"]
+radius = 243.002
+
+[node name="npc_test" type="Node2D"]
+script = ExtResource("1_b6kye")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lsjc6")
+
+[node name="InteractionArea" parent="." instance=ExtResource("2_igufd")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_h2o12")

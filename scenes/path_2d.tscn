@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmidxksitnkm4"]
+
+[ext_resource type="Script" path="res://scripts/path.gd" id="1_ut8qd"]
+[ext_resource type="Texture2D" uid="uid://d0ltrotmor25w" path="res://assets/butterfly/1.png" id="2_et20m"]
+[ext_resource type="Texture2D" uid="uid://bcc4qmhoky7oa" path="res://assets/butterfly/2.png" id="3_6m8yy"]
+[ext_resource type="Texture2D" uid="uid://dmc5nkd4r612f" path="res://assets/butterfly/3.png" id="4_a0v06"]
+
+[sub_resource type="Curve2D" id="Curve2D_vlfql"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -241, -57, -448.155, 261.279, 448.155, -261.279, -66, -388, -220.038, 19.3358, 220.038, -19.3358, 829, -677, 0, 0, 0, 0, 1550, -532, 311.459, -131.505, -311.459, 131.505, 1687, -173)
+}
+point_count = 5
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w1shd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_et20m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6m8yy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a0v06")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="Path2D" type="Path2D"]
+position = Vector2(424, 418)
+curve = SubResource("Curve2D_vlfql")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(-241, -57)
+rotation = -1.08445
+
+[node name="Area2D" type="Area2D" parent="PathFollow2D"]
+script = ExtResource("1_ut8qd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PathFollow2D/Area2D"]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_w1shd")
+autoplay = "default"
+frame_progress = 0.308429
+flip_h = true

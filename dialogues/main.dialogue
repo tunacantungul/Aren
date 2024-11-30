@@ -1,0 +1,110 @@
+~ start
+set GameManager.player_speed = 0
+Aren: What the hell is this!?
+set GameManager.player_speed = 150.0
+=> END
+
+~ npc_1
+set GameManager.player_speed = 0
+Homeless Man: Hey! Please help me! I've fallen, and I can't get up.
+- Help
+	Homeless Man: Thank you!
+	set GameManager.helped_homeless_man = true
+- Ignore
+	Homeless Man: Shame on you!
+	set GameManager.helped_homeless_man = false
+set GameManager.player_speed = 150.0
+=> END
+
+~ npc_2
+set GameManager.player_speed = 0
+Dog: Bark Bark!
+- Give the food to the dog
+	if GameManager.have_food == true:
+		Aren: Are you hungry?
+		Dog: Bark Bark!
+		set GameManager.food_given = true
+	else:
+		Aren: Oh! I wish I had food on me.B
+- Don't give the food
+	Aren: I'm sorry my friend, I can't give you any.
+	Dog: *Attacks!*
+	do die()
+set GameManager.player_speed = 150.0
+=> END
+
+~ npc_3
+set GameManager.player_speed = 0
+Girl: Excuse me, I don't want to be alone. Can I come with you?
+- Take her with you
+	Aren: You can come with me, but don't attempt anything.
+	do show_girl()
+	do hide_real_girl()
+	set GameManager.girl_taken = true
+- Don't take her with you
+	Aren: No, I don't want you wandering with me.
+	Girl: *Still follows from a distance.*
+set GameManager.player_speed = 150.0
+=> END
+
+~ npc_1_a
+set GameManager.player_speed = 0
+if GameManager.helped_homeless_man == true 
+	Homeless Man: Hello again! Thank you for helping me earlier. Here, these are for you 
+	if GameManager.found_item_adi == true:
+		set GameManager.given_item == true
+else: 
+	Homeless man: OH, IT'S YOU! 
+	Homeless Man: *Attacks and kills you.*
+	do die()
+set GameManager.player_speed = 150.0
+=> END
+
+
+~ npc_4
+set GameManager.player_speed = 0
+Suspicious Man: Hey, buddy, can you spare some water?
+- Rudely refuse
+	Aren: Walk away. I won't share anything with you.
+- Politely refuse
+	Character: Sorry, I don't have water.
+	Suspicious Man: *Attacks and kills you.*
+	do die()
+set GameManager.player_speed = 150.0
+=> END
+
+~ npc_3_a
+set GameManager.player_speed = 0
+if GameManager.accompanied_little_girl == true:
+	Girl: Thank you for accompanying me. Take this, it's for you.
+if GameManager.accompanied_little_girl == false:
+	Girl: *throws a stone and runs away.*
+	Aren: AH! Damn it!
+set GameManager.player_speed = 150.0
+=> END
+
+~ npc_5
+set GameManager.player_speed = 0
+The unreliable man: S-Sorry, can you share your food with me?
+- Share
+	Aren: Of course, here you go.
+	The unreliable man: Thanks.
+- Don't share
+	Aren: I won't share my last meal, sorry.
+	The unreliable man: FOOOOOOD!! FOOOOD!! 
+	The unreliable man: *Attacks and kills you.*
+set GameManager.player_speed = 150.0
+=> END
+
+~ npc_6
+set GameManager.player_speed = 0
+Hungry Girl: Um, excuse me, I'm very hungry. If you have any food, can we trade with water?
+- Lie and steal
+	Aren: Hmm, okay, first let me check your bottle. 
+		Aren: *Takes the water and leaves*
+			Hungry Girl: Hey, wait! Don't go! HEEY!
+- Give the food to her
+	Aren: Here little one, enjoy it.
+		Hungry Girl: Ah, thank you do much!
+set GameManager.player_speed = 150.0
+=> END

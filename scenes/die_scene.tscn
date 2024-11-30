@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://dwq5lu0ssnm55"]
+
+[ext_resource type="Texture2D" uid="uid://dcfcat7bap7ab" path="res://icon.svg" id="1_fhpsy"]
+[ext_resource type="Script" path="res://scripts/die_scene.gd" id="1_xv372"]
+[ext_resource type="PackedScene" uid="uid://sq05sskw00fa" path="res://scenes/menu.tscn" id="2_gior8"]
+[ext_resource type="FontFile" uid="uid://hvvco63hx1kj" path="res://assets/fonts/gemunu-libre-v8-latin-700.ttf" id="2_mynjc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sjww1"]
+font = ExtResource("2_mynjc")
+font_size = 64
+outline_size = 15
+outline_color = Color(0.85098, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6ufxr"]
+font = ExtResource("2_mynjc")
+font_size = 48
+
+[node name="DieScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xv372")
+menu_scene = ExtResource("2_gior8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(22.48, 16.04)
+texture = ExtResource("1_fhpsy")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -207.5
+offset_top = -35.0
+offset_right = 207.5
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="Label2" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+text = "YOU HAVE DIED !"
+label_settings = SubResource("LabelSettings_sjww1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+text = "PRESS \"SPACE\" TO CONTINUE"
+label_settings = SubResource("LabelSettings_6ufxr")
+horizontal_alignment = 1

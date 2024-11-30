@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://cb3pxtvrugfpm"]
+
+[ext_resource type="PackedScene" uid="uid://bo43ugnjluad6" path="res://scenes/bush.tscn" id="1_6jdbv"]
+
+[node name="Bushes" type="Node2D"]
+z_index = 2
+
+[node name="Bush" parent="." instance=ExtResource("1_6jdbv")]
+position = Vector2(-2, 36)
+
+[node name="Bush2" parent="." instance=ExtResource("1_6jdbv")]
+position = Vector2(360, 0)
+
+[node name="Bush5" parent="." instance=ExtResource("1_6jdbv")]
+position = Vector2(530, 87)
+
+[node name="Bush6" parent="." instance=ExtResource("1_6jdbv")]
+position = Vector2(-224, 36)
+
+[node name="Bush7" parent="." instance=ExtResource("1_6jdbv")]
+position = Vector2(116, 60)
+
+[node name="Bush3" parent="." instance=ExtResource("1_6jdbv")]
+position = Vector2(-414, 0)
+
+[node name="Bush4" parent="." instance=ExtResource("1_6jdbv")]
+position = Vector2(811, 38)

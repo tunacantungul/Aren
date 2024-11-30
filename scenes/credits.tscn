@@ -1,0 +1,117 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7qvhbtqpd3vt"]
+
+[ext_resource type="Script" path="res://scenes/credits.gd" id="1_bfd8q"]
+[ext_resource type="Texture2D" uid="uid://dcfcat7bap7ab" path="res://icon.svg" id="3_j6m56"]
+[ext_resource type="FontFile" uid="uid://hvvco63hx1kj" path="res://assets/fonts/gemunu-libre-v8-latin-700.ttf" id="4_rjt5u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sjww1"]
+font = ExtResource("4_rjt5u")
+font_size = 64
+outline_size = 15
+outline_color = Color(0.85098, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6ufxr"]
+font = ExtResource("4_rjt5u")
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_53kxk"]
+font = ExtResource("4_rjt5u")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_u6vwy"]
+font = ExtResource("4_rjt5u")
+font_size = 32
+font_color = Color(0.368627, 1, 1, 1)
+
+[node name="DieScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bfd8q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(22.48, 16.04)
+texture = ExtResource("3_j6m56")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -207.5
+offset_top = -35.0
+offset_right = 207.5
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Label2" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Credits"
+label_settings = SubResource("LabelSettings_sjww1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Developers"
+label_settings = SubResource("LabelSettings_6ufxr")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Tuna Can Tungul"
+label_settings = SubResource("LabelSettings_53kxk")
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Deniz Kaya"
+label_settings = SubResource("LabelSettings_53kxk")
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Animations/Graphics"
+label_settings = SubResource("LabelSettings_6ufxr")
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Öykü Deniz Elmas"
+label_settings = SubResource("LabelSettings_53kxk")
+horizontal_alignment = 1
+
+[node name="Label7" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Writer"
+label_settings = SubResource("LabelSettings_6ufxr")
+horizontal_alignment = 1
+
+[node name="Label8" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Kaan Ertürk"
+label_settings = SubResource("LabelSettings_53kxk")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+text = "
+"
+
+[node name="Label9" type="Label" parent="VBoxContainer2/Button"]
+layout_mode = 2
+offset_right = 415.0
+offset_bottom = 36.0
+text = "Go Back"
+label_settings = SubResource("LabelSettings_u6vwy")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer2/Button" to="." method="_on_button_pressed"]

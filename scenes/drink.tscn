@@ -1,0 +1,89 @@
+[gd_scene load_steps=9 format=3 uid="uid://c8tfhcb28pxvh"]
+
+[ext_resource type="Texture2D" uid="uid://k3nqw5lmlnau" path="res://assets/props/drink.png" id="1_ojlrb"]
+[ext_resource type="Script" path="res://scripts/drink.gd" id="1_vc3f8"]
+[ext_resource type="FontFile" uid="uid://hvvco63hx1kj" path="res://assets/fonts/gemunu-libre-v8-latin-700.ttf" id="3_1uur7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vd27o"]
+radius = 68.0
+height = 330.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_1mu28"]
+font = ExtResource("3_1uur7")
+font_size = 64
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_jogua"]
+resource_name = "flash"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("drink:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.301961, 0.301961, 0.301961, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_s7ybl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("drink:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y6hk5"]
+_data = {
+"RESET": SubResource("Animation_s7ybl"),
+"flash": SubResource("Animation_jogua")
+}
+
+[node name="Drink" type="StaticBody2D"]
+position = Vector2(491, 177)
+script = ExtResource("1_vc3f8")
+
+[node name="drink" type="Sprite2D" parent="."]
+position = Vector2(2, -2)
+texture = ExtResource("1_ojlrb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, -14)
+shape = SubResource("CapsuleShape2D_vd27o")
+one_way_collision = true
+
+[node name="Label" type="Label" parent="."]
+z_index = 40
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -196.0
+offset_top = -300.0
+offset_right = 196.0
+offset_bottom = -230.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "[E] TO INTERACT"
+label_settings = SubResource("LabelSettings_1mu28")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_y6hk5")
+}
+autoplay = "flash"

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://2ukut5kr2v06"]
+
+[ext_resource type="Texture2D" uid="uid://bwsgsdxveqfjx" path="res://assets/Scene_04/5B211EBC-A09F-41E3-8DFB-FC7CF50C56BA.png" id="1_5ua3l"]
+[ext_resource type="Texture2D" uid="uid://d2rat6svy6kd6" path="res://assets/Scene_04/1C40D453-77FE-4A28-9E63-AA99483802FB.png" id="2_mk2v1"]
+
+[node name="Scene4" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_5ua3l")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+z_index = 3
+texture = ExtResource("2_mk2v1")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -471)
+scale = Vector2(760, 4)

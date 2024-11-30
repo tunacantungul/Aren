@@ -1,0 +1,5 @@
+~ story
+: Ater an unexpected explosion; you woke up in a place where you don't know.
+: As you were trying to understand what was going on around you, a shadowly figure starts chasing you.
+do change()
+=> END

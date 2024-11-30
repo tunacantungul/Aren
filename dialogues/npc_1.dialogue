@@ -1,0 +1,22 @@
+~ npc_1
+set GameManager.player_speed = 0
+
+Aren: What the hell is this!?
+Homeless Man: Hey! Please help me! I've fallen, and I can't get up.
+- Help
+- Ignore
+
+Dog: Bark Bark!
+- Give the food to dog
+    Aren: Are you hungry?
+    Dog: Bark Bark!
+- Don't gives the food
+    Aren: I'm sorry my friend, I can't give you any.
+
+Girl: Excuse me, I don't want to be alone. Can I come with you?
+- Takes her with you
+    Aren: You can come with me, but don't attempt anything.
+- Don't take her with you
+    Aren: No, I don't want you wandering with me.
+set GameManager.player_speed = 200.0
+=> END

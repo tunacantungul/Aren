@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c12luruyc5w2o"]
+
+[ext_resource type="Texture2D" uid="uid://dilshfswsto17" path="res://assets/transition/3.png" id="1_msb13"]
+[ext_resource type="Texture2D" uid="uid://cmcw6uij81x5o" path="res://assets/Scene_01/8F4E31FF-FF94-42F4-B9DC-F6649269D64C.png" id="2_bfpxj"]
+
+[node name="transition_3" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_msb13")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(2.43187e-05, 725)
+rotation = 3.14159
+scale = Vector2(0.14364, 1)
+texture = ExtResource("2_bfpxj")

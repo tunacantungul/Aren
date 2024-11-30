@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://0am18rvgsyht"]
+
+[ext_resource type="Texture2D" uid="uid://c71g7k4musoil" path="res://assets/Scene_02/D640883C-4C22-4E69-B0FD-88726C59BE62.png" id="2_ts852"]
+[ext_resource type="Texture2D" uid="uid://dlnakoxxhf2ag" path="res://assets/Scene_02/68092ED4-DE82-474F-AB98-B4CF4018B154.png" id="3_qwr37"]
+[ext_resource type="Texture2D" uid="uid://v8str6pdf8gv" path="res://assets/Scene_02/85A012BB-5F57-4ADD-8CFC-429CE89F3A13.png" id="4_lqu2r"]
+[ext_resource type="Texture2D" uid="uid://bprbxkecvu1j0" path="res://assets/Scene_02/1BAAFA6A-EA06-4DAF-B601-783FC1DC0A9A.png" id="5_ic0oi"]
+
+[node name="Scene2" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ts852")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = ExtResource("3_qwr37")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+texture = ExtResource("4_lqu2r")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+z_index = 3
+texture = ExtResource("5_ic0oi")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -471)
+scale = Vector2(760, 4)

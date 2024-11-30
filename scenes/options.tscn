@@ -1,0 +1,76 @@
+[gd_scene load_steps=5 format=3 uid="uid://qpdymqba6j5b"]
+
+[ext_resource type="Script" path="res://scripts/options.gd" id="1_5huwq"]
+[ext_resource type="PackedScene" uid="uid://d0ovhl66bi311" path="res://scenes/volume_slider.tscn" id="2_u0kll"]
+[ext_resource type="Texture2D" uid="uid://da5xxiv1ddgpx" path="res://assets/options_background.png" id="2_ykyw5"]
+[ext_resource type="AudioStream" uid="uid://coxuayq5coja5" path="res://assets/Ambience/Soundscape/AMB_Soundscape_Magical_Concentrate_Loop.wav" id="4_edv2h"]
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5huwq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("2_ykyw5")
+centered = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.5
+offset_top = -68.5
+offset_right = 83.5
+offset_bottom = 68.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(83, 68)
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Master Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="Master" parent="HBoxContainer/PanelContainer/VBoxContainer" instance=ExtResource("2_u0kll")]
+layout_mode = 2
+
+[node name="Music Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="Music" parent="HBoxContainer/PanelContainer/VBoxContainer" instance=ExtResource("2_u0kll")]
+layout_mode = 2
+bus_name = "Music"
+
+[node name="SFX Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="SFX" parent="HBoxContainer/PanelContainer/VBoxContainer" instance=ExtResource("2_u0kll")]
+layout_mode = 2
+bus_name = "SFX"
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_edv2h")
+autoplay = true
+bus = &"Music"
+
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_button_pressed"]

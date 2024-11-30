@@ -1,0 +1,267 @@
+[gd_scene load_steps=47 format=3 uid="uid://bghwa8hxvubw6"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_6o3fu"]
+[ext_resource type="Texture2D" uid="uid://o4mjmd15oqrb" path="res://assets/idle/1.png" id="2_ymqo7"]
+[ext_resource type="Texture2D" uid="uid://dxtc0ivn8bcrg" path="res://assets/idle/2.png" id="3_hh8s8"]
+[ext_resource type="AudioStream" uid="uid://dgnxom1qifqga" path="res://assets/Footstep_Jump_Roll/Footsteps/SFX_Footstep_Dirt_1.wav" id="3_wf5ao"]
+[ext_resource type="Texture2D" uid="uid://duivk1dsd2rla" path="res://assets/idle/3.png" id="4_n4uhh"]
+[ext_resource type="Texture2D" uid="uid://chk8w6kj45kh7" path="res://assets/idle/4.png" id="5_4jmg7"]
+[ext_resource type="Texture2D" uid="uid://772c6eg3fnmi" path="res://assets/idle/5.png" id="6_s4g3e"]
+[ext_resource type="Texture2D" uid="uid://jat66tfwrh7e" path="res://assets/idle/6.png" id="7_dmnfn"]
+[ext_resource type="Texture2D" uid="uid://bcjpd0tdl2uyk" path="res://assets/idle/7.png" id="8_t7btm"]
+[ext_resource type="Texture2D" uid="uid://yvb8v2ovmeyb" path="res://assets/idle/8.png" id="9_cq6dw"]
+[ext_resource type="Texture2D" uid="uid://ddbupve72kkgv" path="res://assets/idle/9.png" id="10_nh3cq"]
+[ext_resource type="Texture2D" uid="uid://dqpo2ub0batay" path="res://assets/run/1.png" id="11_w0f3y"]
+[ext_resource type="Texture2D" uid="uid://dbp7irvrkh3w8" path="res://assets/run/2.png" id="12_t6e3m"]
+[ext_resource type="Texture2D" uid="uid://hqmx1g65nys0" path="res://assets/run/3.png" id="13_c4mg1"]
+[ext_resource type="Texture2D" uid="uid://nve1cbhbih6c" path="res://assets/run/4.png" id="14_fiuot"]
+[ext_resource type="Texture2D" uid="uid://c8uq5ywknlfk3" path="res://assets/run/5.png" id="15_87tsk"]
+[ext_resource type="Texture2D" uid="uid://dxr0d30daxstv" path="res://assets/run/6.png" id="16_7jand"]
+[ext_resource type="Texture2D" uid="uid://bdliqqkb3nmew" path="res://assets/run/7.png" id="17_5q32m"]
+[ext_resource type="Texture2D" uid="uid://tcjwnus44f6b" path="res://assets/run/8.png" id="18_y0q5u"]
+[ext_resource type="Script" path="res://scripts/npc_2_follow.gd" id="20_efrhu"]
+[ext_resource type="Texture2D" uid="uid://qmlth56fcw5l" path="res://assets/NPC_2/1.png" id="21_lp10k"]
+[ext_resource type="Texture2D" uid="uid://ycmhp78bg5pw" path="res://assets/NPC_2_idle/1.png" id="29_ex3bw"]
+[ext_resource type="Texture2D" uid="uid://ertn36tpmm5v" path="res://assets/NPC_2_idle/2.png" id="30_ep0qo"]
+[ext_resource type="Texture2D" uid="uid://c3ipmr6yyqx2e" path="res://assets/NPC_2_new/1.png" id="30_hfhy2"]
+[ext_resource type="Texture2D" uid="uid://dnwt3ccq5g27h" path="res://assets/NPC_2_idle/3.png" id="31_ow31l"]
+[ext_resource type="Texture2D" uid="uid://beagg55i84h8k" path="res://assets/NPC_2_new/2.png" id="31_wg7bs"]
+[ext_resource type="Texture2D" uid="uid://ehspnxtx0ivf" path="res://assets/NPC_2_new/3.png" id="32_5jhel"]
+[ext_resource type="Texture2D" uid="uid://birfvb84r5u6n" path="res://assets/NPC_2_idle/4.png" id="32_m8uon"]
+[ext_resource type="Texture2D" uid="uid://b046th24k5alr" path="res://assets/NPC_2_new/4.png" id="33_1vqlx"]
+[ext_resource type="Texture2D" uid="uid://bf27sseco72jn" path="res://assets/NPC_2_idle/5.png" id="33_7vf18"]
+[ext_resource type="Texture2D" uid="uid://ddcccsodusi17" path="res://assets/NPC_2_new/5.png" id="34_nqmfs"]
+[ext_resource type="Texture2D" uid="uid://bdcrp68pa7bh7" path="res://assets/NPC_2_idle/6.png" id="34_om7f3"]
+[ext_resource type="Texture2D" uid="uid://c1l3vv7k42hgo" path="res://assets/NPC_2_new/6.png" id="35_lxka0"]
+[ext_resource type="Texture2D" uid="uid://dcfpi58xsmbvw" path="res://assets/NPC_2_idle/7.png" id="35_vu4my"]
+[ext_resource type="Texture2D" uid="uid://db2ut68o3wyfi" path="res://assets/NPC_2_new/7.png" id="36_6840e"]
+[ext_resource type="Texture2D" uid="uid://cdl4nu4k4ve80" path="res://assets/NPC_2_idle/8.png" id="36_pdigk"]
+
+[sub_resource type="Animation" id="Animation_ousph"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_ymqo7")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer:stream")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_wf5ao")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_jeg3y"]
+resource_name = "idle"
+length = 1.6
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_ymqo7"), ExtResource("3_hh8s8"), ExtResource("4_n4uhh"), ExtResource("5_4jmg7"), ExtResource("6_s4g3e"), ExtResource("7_dmnfn"), ExtResource("8_t7btm"), ExtResource("9_cq6dw"), ExtResource("10_nh3cq")]
+}
+
+[sub_resource type="Animation" id="Animation_txusb"]
+resource_name = "run"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("11_w0f3y"), ExtResource("12_t6e3m"), ExtResource("13_c4mg1"), ExtResource("14_fiuot"), ExtResource("15_87tsk"), ExtResource("16_7jand"), ExtResource("17_5q32m"), ExtResource("18_y0q5u")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer:stream")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("3_wf5ao"), ExtResource("3_wf5ao")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.7, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rdcm0"]
+_data = {
+"RESET": SubResource("Animation_ousph"),
+"idle": SubResource("Animation_jeg3y"),
+"run": SubResource("Animation_txusb")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkp7i"]
+size = Vector2(25.7692, 89.1539)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_20ep2"]
+radius = 956.118
+
+[sub_resource type="Animation" id="Animation_7q3um"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("21_lp10k")]
+}
+
+[sub_resource type="Animation" id="Animation_hu8oi"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("29_ex3bw"), ExtResource("30_ep0qo"), ExtResource("31_ow31l"), ExtResource("32_m8uon"), ExtResource("33_7vf18"), ExtResource("34_om7f3"), ExtResource("35_vu4my"), ExtResource("36_pdigk")]
+}
+
+[sub_resource type="Animation" id="Animation_mqm52"]
+resource_name = "run"
+length = 1.3
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("30_hfhy2"), ExtResource("31_wg7bs"), ExtResource("32_5jhel"), ExtResource("33_1vqlx"), ExtResource("34_nqmfs"), ExtResource("35_lxka0"), ExtResource("36_6840e")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8t065"]
+_data = {
+"RESET": SubResource("Animation_7q3um"),
+"idle": SubResource("Animation_hu8oi"),
+"run": SubResource("Animation_mqm52")
+}
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_6o3fu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(2.08165e-12, 200)
+scale = Vector2(2, 2)
+texture = ExtResource("2_ymqo7")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -55)
+zoom = Vector2(0.65, 0.65)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rdcm0")
+}
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+z_index = 1
+position = Vector2(-37.5, 243.5)
+scale = Vector2(13, 13)
+shape = SubResource("RectangleShape2D_fkp7i")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_wf5ao")
+bus = &"SFX"
+
+[node name="detection_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
+z_index = 2
+position = Vector2(-30, 215)
+shape = SubResource("CircleShape2D_20ep2")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="NPC_2" type="CharacterBody2D" parent="."]
+visible = false
+z_index = 1
+position = Vector2(-1384, 301)
+scale = Vector2(2, 2)
+script = ExtResource("20_efrhu")
+
+[node name="Sprite2D" type="Sprite2D" parent="NPC_2"]
+texture = ExtResource("21_lp10k")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NPC_2"]
+libraries = {
+"": SubResource("AnimationLibrary_8t065")
+}
+autoplay = "idle"
+
+[connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
