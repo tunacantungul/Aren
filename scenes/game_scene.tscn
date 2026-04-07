@@ -22,12 +22,11 @@
 [ext_resource type="PackedScene" uid="uid://dmidxksitnkm4" path="res://scenes/path_2d.tscn" id="20_nl46h"]
 [ext_resource type="Script" path="res://scripts/shadow_speeder.gd" id="21_pkyd3"]
 [ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="22_hud"]
+[ext_resource type="PackedScene" uid="uid://exitdoor_aren01" path="res://scenes/exit_door.tscn" id="23_exit"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pw4tu"]
 size = Vector2(56, 248.2)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_finish"]
-size = Vector2(200, 2000)
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_k523j")
@@ -161,13 +160,7 @@ scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_pw4tu")
 one_way_collision = true
 
-[node name="FinishTrigger" type="Area2D" parent="."]
-position = Vector2(19500, 0)
-script = "res://scripts/finish_trigger.gd"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishTrigger"]
-shape = SubResource("RectangleShape2D_finish")
+[node name="ExitDoor" parent="." instance=ExtResource("23_exit")]
+position = Vector2(17500, 60)
 
 [node name="HUD" parent="." instance=ExtResource("22_hud")]
-
-[connection signal="body_entered" from="FinishTrigger" to="FinishTrigger" method="_on_body_entered"]
