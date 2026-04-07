@@ -99,11 +99,11 @@ set GameManager.player_speed = 150.0
 set GameManager.player_speed = 0
 Hungry Girl: Um, excuse me, I'm very hungry. If you have any food, can we trade with water?
 - Lie and steal
-	Aren: Hmm, okay, first let me check your bottle. 
-		Aren: *Takes the water and leaves*
-			Hungry Girl: Hey, wait! Don't go! HEEY!
+	Aren: Hmm, okay, first let me check your bottle.
+	Aren: *Takes the water and leaves*
+	Hungry Girl: Hey, wait! Don't go! HEEY!
 - Give the food to her
 	Aren: Here little one, enjoy it.
-		Hungry Girl: Ah, thank you do much!
+	Hungry Girl: Ah, thank you so much!
 set GameManager.player_speed = 150.0
 => END
