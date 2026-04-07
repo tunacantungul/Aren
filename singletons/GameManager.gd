@@ -31,8 +31,32 @@ var drink_given = false
 var girl_taken = false
 
 var shadow_speed = 100.0
+var shadow_moving: bool = false
+
+func reset_state():
+	player_speed = 150.0
+	speed_boost_active = false
+	_boost_timer = 0.0
+	helped_homeless_man = false
+	help_count = 0
+	have_food = false
+	have_drink = false
+	npc_1_in_range = false
+	npc_2_in_range = false
+	npc_3_in_range = false
+	npc_4_in_range = false
+	npc_5_in_range = false
+	npc_6_in_range = false
+	food_in_range = false
+	drink_in_range = false
+	food_given = false
+	drink_given = false
+	girl_taken = false
+	shadow_speed = 100.0
+	shadow_moving = false
 
 func change():
+	reset_state()
 	get_tree().change_scene_to_packed(game_scene)
 	
 func die():

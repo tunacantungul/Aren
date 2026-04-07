@@ -3,6 +3,8 @@ extends CharacterBody2D
 var collided_player = false
 
 func _physics_process(delta):
+	if not GameManager.shadow_moving:
+		return
 	velocity.x = GameManager.shadow_speed
 	move_and_slide()
 

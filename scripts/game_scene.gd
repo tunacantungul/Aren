@@ -8,17 +8,20 @@ extends Node2D
 @onready var player = $Player
 @onready var shadow = $Holder/Shadow
 
-const SHADOW_WARNING_DISTANCE: float = 1100.0
+const SHADOW_WARNING_DISTANCE: float = 900.0
 var _shadow_near_state: bool = false
 
 func _ready():
 	spawn_scene_two()
+	get_tree().create_timer(2.0).timeout.connect(func(): GameManager.shadow_moving = true)
 
 func spawn_scene_two():
 	var list = get_children()
 	print(list)
 
 func _process(_delta):
+	if not GameManager.shadow_moving:
+		return
 	var dist = player.global_position.x - shadow.global_position.x
 	if dist < SHADOW_WARNING_DISTANCE and not _shadow_near_state:
 		_shadow_near_state = true
