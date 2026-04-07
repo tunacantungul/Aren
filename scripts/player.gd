@@ -26,6 +26,8 @@ func _physics_process(delta):
 	#DialogueManager.show_example_dialogue_balloon(load("res://dialogues/main.dialogue"), "start")
 
 	var PlayerSpeed = GameManager.player_speed
+	if GameManager.speed_boost_active and PlayerSpeed > 0:
+		PlayerSpeed = GameManager.BOOST_SPEED
 	if GameManager.npc_1_in_range == true:
 		if Input.is_action_just_pressed("interact"):
 			DialogueManager.show_example_dialogue_balloon(load("res://dialogues/main.dialogue"), "npc_1")

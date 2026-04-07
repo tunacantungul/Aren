@@ -1,72 +1,88 @@
 ~ start
 set GameManager.player_speed = 0
-Aren: What the hell is this!?
+Aren: What just happened...? Where am I?
+Aren: That darkness behind me — it's moving. I have to keep going.
 set GameManager.player_speed = 150.0
 => END
 
 ~ npc_1
 set GameManager.player_speed = 0
-Homeless Man: Hey! Please help me! I've fallen, and I can't get up.
-- Help
-	Homeless Man: Thank you!
+Homeless Man: Please... help me. I fell and I can't get back up. My leg—
+- Help him up
+	Aren: Here, take my hand. Lean on me.
+	Homeless Man: Thank you. Truly. You didn't have to stop.
 	set GameManager.helped_homeless_man = true
-- Ignore
-	Homeless Man: Shame on you!
+	do increment_help_count()
+- Keep moving
+	Aren: I'm sorry. I can't stop right now.
+	Homeless Man: Please... I'll die out here alone.
 	set GameManager.helped_homeless_man = false
 set GameManager.player_speed = 150.0
 => END
 
 ~ npc_2
 set GameManager.player_speed = 0
-Dog: Bark Bark!
-- Give the food to the dog
+Dog: *A starving dog blocks the path, teeth bared, growling low.*
+- Offer it food
 	if GameManager.have_food == true:
-		Aren: Are you hungry?
-		Dog: Bark Bark!
+		Aren: Easy... here. This is all I have, but take it.
+		Dog: *Sniffs cautiously, then steps aside. It watches you go with tired eyes.*
 		set GameManager.food_given = true
+		do increment_help_count()
 	else:
-		Aren: Oh! I wish I had food on me.
-- Don't give the food
-	Aren: I'm sorry my friend, I can't give you any.
-	Dog: *Attacks!*
+		Aren: I'm sorry... I have nothing to give you.
+		Dog: *Stares at you, then slowly moves aside.*
+- Push past it
+	Aren: Get out of my way. I don't have time for this.
+	Dog: *Lunges forward — claws and teeth — there's no getting past it.*
 	do die()
 set GameManager.player_speed = 150.0
 => END
 
 ~ npc_3
 set GameManager.player_speed = 0
-Girl: Excuse me, I don't want to be alone. Can I come with you?
+Girl: Wait — please. I've been alone out here for so long. I'm scared.
 - Take her with you
-	Aren: You can come with me, but don't attempt anything.
+	Aren: Stay close. Keep up and don't fall behind — I won't slow down.
+	Girl: I will. I promise. Thank you for not leaving me.
 	do show_girl()
 	do hide_real_girl()
 	set GameManager.girl_taken = true
-- Don't take her with you
-	Aren: No, I don't want you wandering with me.
-	Girl: *Still follows from a distance.*
+	do increment_help_count()
+- Leave her behind
+	Aren: It's too dangerous. I can't protect both of us right now.
+	Girl: ...okay. I understand. Please be safe.
 set GameManager.player_speed = 150.0
 => END
 
 ~ npc_1_a
 set GameManager.player_speed = 0
 if GameManager.helped_homeless_man == true:
-	Homeless Man: Hello again! Thank you for helping me earlier. Here, these are for you.
+	Homeless Man: You! You're the one who helped me back there.
+	Homeless Man: I found this along the road. Take it — you'll need it more than I do.
+	Homeless Man: And run. Whatever that darkness is... don't let it catch you.
+	do increment_help_count()
+	do give_speed_boost()
 else:
-	Homeless man: OH, IT'S YOU! 
-	Homeless Man: *Attacks and kills you.*
+	Homeless Man: YOU. You walked right past me and left me there to die.
+	Homeless Man: I nearly didn't make it because of you.
+	Homeless Man: *He lunges at you in rage.*
 	do die()
 set GameManager.player_speed = 150.0
 => END
 
-
 ~ npc_4
 set GameManager.player_speed = 0
-Suspicious Man: Hey, buddy, can you spare some water?
-- Rudely refuse
-	Aren: Walk away. I won't share anything with you.
-- Politely refuse
-	Character: Sorry, I don't have water.
-	Suspicious Man: *Attacks and kills you.*
+Suspicious Man: Stop right there. Out here, being polite gets you killed.
+Suspicious Man: Show me you're not someone I need to worry about.
+- Hold your ground
+	Aren: Step aside. I'm not looking for trouble — but I won't back down either.
+	Suspicious Man: *Studies you for a long moment, then moves.*
+	Suspicious Man: Keep moving. And watch your back.
+- Try to reason with him
+	Aren: Look, I don't want any trouble. Can we just—
+	Suspicious Man: Too slow. Too soft.
+	Suspicious Man: *He doesn't give you a second chance.*
 	do die()
 set GameManager.player_speed = 150.0
 => END
@@ -74,36 +90,39 @@ set GameManager.player_speed = 150.0
 ~ npc_3_a
 set GameManager.player_speed = 0
 if GameManager.girl_taken == true:
-	Girl: Thank you for accompanying me. Take this, it's for you.
+	Girl: I found something back there while we were walking. Here — take it.
+	Girl: I'm glad you didn't leave me behind.
 if GameManager.girl_taken == false:
-	Girl: *throws a stone and runs away.*
-	Aren: AH! Damn it!
+	Girl: *She hurls a rock at you and runs.*
+	Aren: Ow! What was that—
 set GameManager.player_speed = 150.0
 => END
 
 ~ npc_5
 set GameManager.player_speed = 0
-The unreliable man: S-Sorry, can you share your food with me?
-- Share
-	Aren: Of course, here you go.
-	The unreliable man: Thanks.
-- Don't share
-	Aren: I won't share my last meal, sorry.
-	The unreliable man: FOOOOOOD!! FOOOOD!!
-	The unreliable man: *Attacks and kills you.*
+The Wanderer: H-hey... please. I haven't eaten in days. I'm not going to make it.
+- Share what you have
+	Aren: Here. Take it. You need it more than I do right now.
+	The Wanderer: Thank you... thank you. I won't forget this. Keep running.
+	do increment_help_count()
+- Refuse
+	Aren: I'm sorry. I need everything I have just to survive this.
+	The Wanderer: You don't understand — I'm DESPERATE. I have nothing left!
+	The Wanderer: *He throws himself at you. It's him or you.*
 	do die()
 set GameManager.player_speed = 150.0
 => END
 
 ~ npc_6
 set GameManager.player_speed = 0
-Hungry Girl: Um, excuse me, I'm very hungry. If you have any food, can we trade with water?
-- Lie and steal
-	Aren: Hmm, okay, first let me check your bottle.
-	Aren: *Takes the water and leaves*
-	Hungry Girl: Hey, wait! Don't go! HEEY!
-- Give the food to her
-	Aren: Here little one, enjoy it.
-	Hungry Girl: Ah, thank you so much!
+Hungry Girl: Excuse me... I'm really hungry. Do you have any food? I have water I can trade.
+- Lie and take the water
+	Aren: Sure, let me check. Hand me your bottle first.
+	Aren: *Takes the water and keeps walking.*
+	Hungry Girl: Hey! Wait — come back! You said—!
+- Give her the food
+	Aren: Here. Go on, eat.
+	Hungry Girl: Are you sure? Thank you so much. Really.
+	do increment_help_count()
 set GameManager.player_speed = 150.0
 => END

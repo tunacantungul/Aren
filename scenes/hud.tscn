@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://hud_scene_aren"]
+
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_hud"]
+[ext_resource type="FontFile" uid="uid://hvvco63hx1kj" path="res://assets/fonts/gemunu-libre-v8-latin-700.ttf" id="2_font"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_counter"]
+font = ExtResource("2_font")
+font_size = 28
+font_color = Color(1, 1, 0.8, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_boost"]
+font = ExtResource("2_font")
+font_size = 36
+font_color = Color(1, 0.9, 0.1, 1)
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_warning"]
+font = ExtResource("2_font")
+font_size = 38
+font_color = Color(1, 0.08, 0.08, 1)
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+
+[node name="HelpCounter" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 16.0
+offset_bottom = 56.0
+grow_horizontal = 2
+text = "HELPED: 0 / 4"
+label_settings = SubResource("LabelSettings_counter")
+horizontal_alignment = 0
+
+[node name="SpeedBoost" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 60.0
+offset_bottom = 105.0
+grow_horizontal = 2
+text = "SPEED BOOST!"
+label_settings = SubResource("LabelSettings_boost")
+horizontal_alignment = 1
+
+[node name="ShadowWarning" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 110.0
+offset_bottom = 160.0
+grow_horizontal = 2
+text = "RUN FROM THE SHADOW"
+label_settings = SubResource("LabelSettings_warning")
+horizontal_alignment = 1

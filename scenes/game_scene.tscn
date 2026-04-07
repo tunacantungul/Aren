@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://kw8hgyevm11x"]
+[gd_scene load_steps=24 format=3 uid="uid://kw8hgyevm11x"]
 
 [ext_resource type="PackedScene" uid="uid://dskrdqjwm4gfu" path="res://scenes/scene_1.tscn" id="1_6ve65"]
 [ext_resource type="Script" path="res://scripts/game_scene.gd" id="1_k523j"]
@@ -21,9 +21,13 @@
 [ext_resource type="PackedScene" uid="uid://c8tfhcb28pxvh" path="res://scenes/drink.tscn" id="19_sx1xp"]
 [ext_resource type="PackedScene" uid="uid://dmidxksitnkm4" path="res://scenes/path_2d.tscn" id="20_nl46h"]
 [ext_resource type="Script" path="res://scripts/shadow_speeder.gd" id="21_pkyd3"]
+[ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="22_hud"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pw4tu"]
 size = Vector2(56, 248.2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_finish"]
+size = Vector2(200, 2000)
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_k523j")
@@ -156,3 +160,14 @@ position = Vector2(88, -14.5)
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_pw4tu")
 one_way_collision = true
+
+[node name="FinishTrigger" type="Area2D" parent="."]
+position = Vector2(19500, 0)
+script = "res://scripts/finish_trigger.gd"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishTrigger"]
+shape = SubResource("RectangleShape2D_finish")
+
+[node name="HUD" parent="." instance=ExtResource("22_hud")]
+
+[connection signal="body_entered" from="FinishTrigger" to="FinishTrigger" method="_on_body_entered"]
