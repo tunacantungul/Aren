@@ -1,0 +1,16 @@
+# Godot 4 specific ignores
+.godot/
+
+# Mono/C# specific
+.mono/
+data_*/
+mono_crash.*.json
+
+# Build output
+build/
+export/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+desktop.ini
