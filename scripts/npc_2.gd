@@ -20,4 +20,3 @@ func hide_girl():
 	
 func npc_2():
 	pass
-

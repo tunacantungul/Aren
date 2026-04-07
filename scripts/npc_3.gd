@@ -16,4 +16,3 @@ func _process(delta):
 	
 func npc_3():
 	pass
-

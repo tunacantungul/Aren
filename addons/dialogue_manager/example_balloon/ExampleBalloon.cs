@@ -5,16 +5,19 @@ namespace DialogueManagerRuntime
 {
   public partial class ExampleBalloon : CanvasLayer
   {
-    const string NEXT_ACTION = "ui_accept";
-    const string SKIP_ACTION = "ui_cancel";
+    [Export] public Resource DialogueResource;
+    [Export] public string StartFromTitle = "";
+    [Export] public bool AutoStart = false;
+    [Export] public string NextAction = "ui_accept";
+    [Export] public string SkipAction = "ui_cancel";
 
 
     Control balloon;
     RichTextLabel characterLabel;
     RichTextLabel dialogueLabel;
     VBoxContainer responsesMenu;
+    Polygon2D progress;
 
-    Resource resource;
     Array<Variant> temporaryGameStates = new Array<Variant>();
     bool isWaitingForInput = false;
     bool willHideBalloon = false;
@@ -25,20 +28,26 @@ namespace DialogueManagerRuntime
       get => dialogueLine;
       set
       {
-        isWaitingForInput = false;
-        balloon.FocusMode = Control.FocusModeEnum.All;
-        balloon.GrabFocus();
-
+        // Dialogue has finished so close the balloon
         if (value == null)
         {
-          QueueFree();
+          if (Owner == null)
+          {
+            QueueFree();
+          }
+          else
+          {
+            Hide();
+          }
           return;
         }
 
         dialogueLine = value;
-        UpdateDialogue();
+        ApplyDialogueLine();
       }
     }
+
+    Timer MutationCooldown = new Timer();
 
 
     public override void _Ready()
@@ -47,6 +56,7 @@ namespace DialogueManagerRuntime
       characterLabel = GetNode<RichTextLabel>("%CharacterLabel");
       dialogueLabel = GetNode<RichTextLabel>("%DialogueLabel");
       responsesMenu = GetNode<VBoxContainer>("%ResponsesMenu");
+      progress = GetNode<Polygon2D>("%Progress");
 
       balloon.Hide();
 
@@ -55,7 +65,7 @@ namespace DialogueManagerRuntime
         if ((bool)dialogueLabel.Get("is_typing"))
         {
           bool mouseWasClicked = @event is InputEventMouseButton && (@event as InputEventMouseButton).ButtonIndex == MouseButton.Left && @event.IsPressed();
-          bool skipButtonWasPressed = @event.IsActionPressed(SKIP_ACTION);
+          bool skipButtonWasPressed = @event.IsActionPressed(SkipAction);
           if (mouseWasClicked || skipButtonWasPressed)
           {
             GetViewport().SetInputAsHandled();
@@ -73,18 +83,43 @@ namespace DialogueManagerRuntime
         {
           Next(dialogueLine.NextId);
         }
-        else if (@event.IsActionPressed(NEXT_ACTION) && GetViewport().GuiGetFocusOwner() == balloon)
+        else if (@event.IsActionPressed(NextAction) && GetViewport().GuiGetFocusOwner() == balloon)
         {
           Next(dialogueLine.NextId);
         }
       };
 
+      if (string.IsNullOrEmpty((string)responsesMenu.Get("next_action")))
+      {
+        responsesMenu.Set("next_action", NextAction);
+      }
       responsesMenu.Connect("response_selected", Callable.From((DialogueResponse response) =>
       {
         Next(response.NextId);
       }));
 
+
+      // Hide the balloon when a mutation is running
+      MutationCooldown.Timeout += () =>
+      {
+        if (willHideBalloon)
+        {
+          willHideBalloon = false;
+          balloon.Hide();
+        }
+      };
+      AddChild(MutationCooldown);
+
       DialogueManager.Mutated += OnMutated;
+
+      if (AutoStart)
+      {
+        if (!IsInstanceValid(DialogueResource))
+        {
+          throw new System.Exception(DialogueManager.GetErrorMessage(143));
+        }
+        Start();
+      }
     }
 
 
@@ -101,31 +136,67 @@ namespace DialogueManagerRuntime
     }
 
 
-    public async void Start(Resource dialogueResource, string title, Array<Variant> extraGameStates = null)
+    public override async void _Notification(int what)
     {
-      temporaryGameStates = extraGameStates ?? new Array<Variant>();
-      isWaitingForInput = false;
-      resource = dialogueResource;
+      // Detect a change of locale and update the current dialogue line to show the new language
+      if (what == NotificationTranslationChanged && IsInstanceValid(dialogueLabel))
+      {
+        float visibleRatio = dialogueLabel.VisibleRatio;
+        DialogueLine = await DialogueManager.GetNextDialogueLine(DialogueResource, DialogueLine.Id, temporaryGameStates);
+        if (visibleRatio < 1.0f)
+        {
+          dialogueLabel.Call("skip_typing");
+        }
+      }
+    }
 
-      DialogueLine = await DialogueManager.GetNextDialogueLine(resource, title, temporaryGameStates);
+
+    public override void _Process(double delta)
+    {
+      base._Process(delta);
+
+      if (IsInstanceValid(dialogueLine))
+      {
+        progress.Visible = !(bool)dialogueLabel.Get("is_typing") && dialogueLine.Responses.Count == 0 && !dialogueLine.HasTag("voice");
+      }
+    }
+
+
+    public async void Start(Resource dialogueResource = null, string title = "", Array<Variant> extraGameStates = null)
+    {
+      temporaryGameStates = new Array<Variant> { this } + (extraGameStates ?? new Array<Variant>());
+      isWaitingForInput = false;
+
+      if (IsInstanceValid(dialogueResource))
+      {
+        DialogueResource = dialogueResource;
+      }
+      if (title != "")
+      {
+        StartFromTitle = title;
+      }
+
+      DialogueLine = await DialogueManager.GetNextDialogueLine(DialogueResource, StartFromTitle, temporaryGameStates);
+      Show();
     }
 
 
     public async void Next(string nextId)
     {
-      DialogueLine = await DialogueManager.GetNextDialogueLine(resource, nextId, temporaryGameStates);
+      DialogueLine = await DialogueManager.GetNextDialogueLine(DialogueResource, nextId, temporaryGameStates);
     }
 
 
     #region Helpers
 
 
-    private async void UpdateDialogue()
+    private async void ApplyDialogueLine()
     {
-      if (!IsNodeReady())
-      {
-        await ToSignal(this, SignalName.Ready);
-      }
+      MutationCooldown.Stop();
+
+      isWaitingForInput = false;
+      balloon.FocusMode = Control.FocusModeEnum.All;
+      balloon.GrabFocus();
 
       // Set up the character name
       characterLabel.Visible = !string.IsNullOrEmpty(dialogueLine.Character);
@@ -180,18 +251,14 @@ namespace DialogueManagerRuntime
     #region signals
 
 
-    private void OnMutated(Dictionary _mutation)
+    private void OnMutated(Dictionary mutation)
     {
-      isWaitingForInput = false;
-      willHideBalloon = true;
-      GetTree().CreateTimer(0.1f).Timeout += () =>
+      if (!(bool)mutation["is_inline"])
       {
-        if (willHideBalloon)
-        {
-          willHideBalloon = false;
-          balloon.Hide();
-        }
-      };
+        isWaitingForInput = false;
+        willHideBalloon = true;
+        MutationCooldown.Start(0.1f);
+      }
     }
 
 

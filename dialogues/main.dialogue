@@ -25,7 +25,7 @@ Dog: Bark Bark!
 		Dog: Bark Bark!
 		set GameManager.food_given = true
 	else:
-		Aren: Oh! I wish I had food on me.B
+		Aren: Oh! I wish I had food on me.
 - Don't give the food
 	Aren: I'm sorry my friend, I can't give you any.
 	Dog: *Attacks!*
@@ -49,11 +49,9 @@ set GameManager.player_speed = 150.0
 
 ~ npc_1_a
 set GameManager.player_speed = 0
-if GameManager.helped_homeless_man == true 
-	Homeless Man: Hello again! Thank you for helping me earlier. Here, these are for you 
-	if GameManager.found_item_adi == true:
-		set GameManager.given_item == true
-else: 
+if GameManager.helped_homeless_man == true:
+	Homeless Man: Hello again! Thank you for helping me earlier. Here, these are for you.
+else:
 	Homeless man: OH, IT'S YOU! 
 	Homeless Man: *Attacks and kills you.*
 	do die()
@@ -75,9 +73,9 @@ set GameManager.player_speed = 150.0
 
 ~ npc_3_a
 set GameManager.player_speed = 0
-if GameManager.accompanied_little_girl == true:
+if GameManager.girl_taken == true:
 	Girl: Thank you for accompanying me. Take this, it's for you.
-if GameManager.accompanied_little_girl == false:
+if GameManager.girl_taken == false:
 	Girl: *throws a stone and runs away.*
 	Aren: AH! Damn it!
 set GameManager.player_speed = 150.0
@@ -91,8 +89,9 @@ The unreliable man: S-Sorry, can you share your food with me?
 	The unreliable man: Thanks.
 - Don't share
 	Aren: I won't share my last meal, sorry.
-	The unreliable man: FOOOOOOD!! FOOOOD!! 
+	The unreliable man: FOOOOOOD!! FOOOOD!!
 	The unreliable man: *Attacks and kills you.*
+	do die()
 set GameManager.player_speed = 150.0
 => END
 

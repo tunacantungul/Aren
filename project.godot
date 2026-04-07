@@ -24,11 +24,11 @@ config/icon="res://assets/icon.png"
 GameManager="*res://singletons/GameManager.gd"
 SoundManager="*res://singletons/SoundManager.gd"
 SignalManager="*res://singletons/SignalManager.gd"
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+DialogueManager="*uid://dxle6pgtbvei5"
 
 [dialogue_manager]
 
-general/states=["GameManager", "SignalManager"]
+runtime/state_autoload_shortcuts=["GameManager", "SignalManager"]
 
 [display]
 
